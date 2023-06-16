@@ -11,7 +11,7 @@ Netbeans  | 16
 Xampp  | 8.1.17
 Java jdk  | 18.0.1
 Spring Boot plugin | 3.1 
-HeidySQL  | 12.4
+MongoCompass  | Ultima
 Postman  | Ultima 
 
 <h1>Dependencias</h1>
