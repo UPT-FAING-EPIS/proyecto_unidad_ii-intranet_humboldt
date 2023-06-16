@@ -1,2 +1,28 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Auq5ESal)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11320294&assignment_repo_type=AssignmentRepo)
+<h1>API USUARIOS-MONGODB</h1>
+<hr>
+Nuestro grupo a adaptado una api usuarios para usar con MongoDB para el registro de los alumnos y docentes, donde cada uno tendra su usuario propio para entrar a la intranet.
+
+
+<h1>Tecnologias Utilizadas </h1>
+
+Programa  | Version
+------------- | -------------
+Netbeans  | 16
+Xampp  | 8.1.17
+Java jdk  | 18.0.1
+Spring Boot plugin | 3.1 
+HeidySQL  | 12.4
+Postman  | Ultima 
+
+<h1>Dependencias</h1>
+
+| Dependencias  | 
+| ------------- |
+|Spring Web 
+|Spring for MongoDB 
+|Lombok  
+|Spring for RabbitMQ
+|Spring Boot Devtools
+
+
+
