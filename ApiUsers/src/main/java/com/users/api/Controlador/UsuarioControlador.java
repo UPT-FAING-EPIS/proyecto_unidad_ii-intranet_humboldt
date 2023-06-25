@@ -83,11 +83,17 @@ public class UsuarioControlador {
         String contrasenia = u.getContrasenia();
 
         String subject = "Registro exitoso";
-        String body = "Hola,\n\nTu registro ha sido exitoso. Aquí están tus datos de acceso:\n\nDNI: "
-                + dni + "\nContraseña: " + contrasenia;
-
-        emailService.enviarCorreo(correo, subject, body);
-        
+        String body = "<html><body>" +
+        "<h2>¡Bienvenido nuevo usuario!</h2>" +
+        "<p>Nos complace informarte que tu registro ha sido exitoso. A continuación, encontrarás tus datos de acceso:</p>" +
+        "<ul>" +
+        "<li><strong>Codigo:</strong><br>" + dni + "</li>" +
+        "<li><strong>Contraseña:</strong><br>" + contrasenia + "</li>" +
+        "</ul>" +
+        "<p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos. ¡Bienvenido y que disfrutes de nuestros servicios!</p>" +
+        "<p>Saludos cordiales" +
+        "</body></html>";
+        emailService.enviarCorreo(correo, subject, body);     
 
     }
     
