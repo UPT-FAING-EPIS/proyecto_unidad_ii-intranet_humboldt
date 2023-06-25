@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.users.api.Servicio;
 
 import com.users.api.Entidad.UsuarioRol;
@@ -14,7 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UsuarioRolServicio {
-
+    
+    //METODOS PARA LA ASIGNACION DE ROL AL USUARIO
     private final UsuarioRolRepositorio userrolrepositorio;
         
         public void save (UsuarioRol userrol){

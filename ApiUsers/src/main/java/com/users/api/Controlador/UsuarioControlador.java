@@ -1,15 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.users.api.Controlador;
 
 import com.users.api.Entidad.Usuarios;
-import com.users.api.Publicador.Publisher;
+import com.users.api.Entidad.rabbitmessage;
+import com.users.api.Repositorio.UsuarioRepositorio;
+import com.users.api.Servicio.EmailServicio;
 import com.users.api.Servicio.UsuarioServicio;
+import com.users.api.mensaje.RabbitMessageProducer;
+import jakarta.mail.MessagingException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,37 +24,82 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
 public class UsuarioControlador {
+    
+    //CONTROLADOR PARA USUARIOS
+    private final RabbitMessageProducer rabbitMessageProducer;  
+    
+    
+    @Autowired
+    private UsuarioRepositorio usuariosRepository;
+    
+    @Autowired
+    private EmailServicio emailService;
+    
     private final UsuarioServicio usuarioservicio;
-    private final Publisher rabbitMQPublisher;
+    
+    @Autowired
+    public UsuarioControlador(UsuarioServicio usuarioservicio, RabbitMessageProducer rabbitMessageProducer) {
+        this.usuarioservicio = usuarioservicio;
+        this.rabbitMessageProducer = rabbitMessageProducer;
+    }
     
     @GetMapping
     public List<Usuarios> findAll(){
+        // Enviar mensaje a RabbitMQ
+        rabbitmessage message = new rabbitmessage();
+        message.setTimestamp(LocalDateTime.now());
+        message.setLevel("GET");
+        message.setMessage("Se ha listado los usuarios");
+        rabbitMessageProducer.sendMessage(message);
         return usuarioservicio.findAll();
     }
     
     @GetMapping("/{id}")
     public Usuarios findById(@PathVariable String id){
+        // Enviar mensaje a RabbitMQ
+        rabbitmessage message = new rabbitmessage();
+        message.setTimestamp(LocalDateTime.now());
+        message.setLevel("GET");
+        message.setMessage("Se ha realizado busqueda del usuario");
+        rabbitMessageProducer.sendMessage(message);
         Optional<Usuarios> usuario = usuarioservicio.findById(id);
-        // Envío del mensaje a RabbitMQ
-        String mensaje = "Se ha realizado una busqueda del usuario con DNI : " + id;
-        rabbitMQPublisher.send(mensaje);
         return usuario.orElse(null);
         
     }
     
     @PostMapping
-    public void save(@RequestBody Usuarios u){
+    public void save(@RequestBody Usuarios u) throws MessagingException{
         usuarioservicio.save(u);
-        //Envio de mensaje a RabbitMQ
-        String mensaje = "Se ha guardado un nuevo usuario con el DNI: " + u.getDni();
-        rabbitMQPublisher.send(mensaje);
+        // Enviar mensaje a RabbitMQ
+        rabbitmessage message = new rabbitmessage();
+        message.setTimestamp(LocalDateTime.now());
+        message.setLevel("POST");
+        message.setMessage("Se ha guardado un nuevo usuario");
+        rabbitMessageProducer.sendMessage(message);
+        
+        // Envío del correo electrónico al usuario
+        String correo = u.getCorreo();
+        String dni = u.getDni();
+        String contrasenia = u.getContrasenia();
+
+        String subject = "Registro exitoso";
+        String body = "Hola,\n\nTu registro ha sido exitoso. Aquí están tus datos de acceso:\n\nDNI: "
+                + dni + "\nContraseña: " + contrasenia;
+
+        emailService.enviarCorreo(correo, subject, body);
+        
+
     }
     
     @PutMapping("/{id}")
     public void update(@RequestBody Usuarios u){
+        // Enviar mensaje a RabbitMQ
+        rabbitmessage message = new rabbitmessage();
+        message.setTimestamp(LocalDateTime.now());
+        message.setLevel("PUT");
+        message.setMessage("Se ha realizado los cambios del usuario");
+        rabbitMessageProducer.sendMessage(message);
         usuarioservicio.save(u);
-        //Envio de mensaje a RabbitMQ
-        String mensaje = "Se ha actualizado el Usuario: " + u.getDni();
-        rabbitMQPublisher.send(mensaje);
+
     }       
 }

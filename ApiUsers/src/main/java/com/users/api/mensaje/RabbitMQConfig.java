@@ -1,4 +1,4 @@
-package com.users.api.Publicador;
+package com.users.api.mensaje;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,13 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PublisherConfig {
+public class RabbitMQConfig {
+    
+    //CONFIGURACION DEL RABBIT
     
     @Value("${apiusuarios.queue.name}")
-    private String message;
+    private String queueName;
     
-    @Bean
-    public Queue queue(){
-        return new Queue(message,true);
+     @Bean
+    public Queue rabbitQueue() {
+        return new Queue(queueName);
     }
 }

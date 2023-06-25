@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RolServicio {
+    
+    //METODOS PARA EL DOCUMENT DE ROL
     private final RolRepositorio rolrepositorio;    
     
     public void save(Rol rol){

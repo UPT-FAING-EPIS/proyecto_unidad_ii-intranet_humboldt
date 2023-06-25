@@ -8,6 +8,7 @@ import com.users.api.Entidad.UsuarioRol;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+//REPOSITORIO PARA USUARIOROL
 @Repository
 public interface UsuarioRolRepositorio extends MongoRepository<UsuarioRol, Long>{
     
