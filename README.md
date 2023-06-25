@@ -7,7 +7,7 @@ Nuestro grupo a adaptado una api usuarios para usar con MongoDB para el registro
 
 Programa  | Version
 ------------- | -------------
-Netbeans  | 16
+Netbeans  | 18
 Xampp  | 8.1.17
 Java jdk  | 18.0.1
 Spring Boot plugin | 3.1 
@@ -23,6 +23,8 @@ Postman  | Ultima
 |Lombok  
 |Spring for RabbitMQ
 |Spring Boot Devtools
+|Spring Boot mail
+|Jackson
 
 
 
