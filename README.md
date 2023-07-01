@@ -2,6 +2,14 @@
 <hr>
 Nuestro grupo a adaptado una api usuarios para usar con MongoDB para el registro de los alumnos y docentes, donde cada uno tendra su usuario propio para entrar a la intranet y ademas cuando se registre un nuevo usuario le llegue un email de su usuario y contraseña.
 
+<hr>
+Para poder crear el target primero debemos saber que version de java tenemos.
+java --version
+<br>
+Si tiene una version destinta debe cambiar tanto el dockerfile la version como el pom.xml con la version que tiene.
+<br>
+Luego para crear el target es aplicar el comando .<br>
+mvn clean install
 
 <h1>Tecnologias Utilizadas </h1>
 
