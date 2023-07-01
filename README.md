@@ -4,9 +4,9 @@ Nuestro grupo a adaptado una api usuarios para usar con MongoDB para el registro
 
 <hr>
 Para poder crear el target primero debemos saber que version de java tenemos.<br>
-java --version
+java --version<br>
 <br>
-Si tiene una version destinta debe cambiar tanto el dockerfile la version como el pom.xml con la version que tiene.
+Si tiene una version destinta debe cambiar tanto el dockerfile la version como el pom.xml con la version que tiene.<br>
 <br>
 Luego para crear el target es aplicar el comando .<br>
 mvn clean install
